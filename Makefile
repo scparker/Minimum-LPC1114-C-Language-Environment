@@ -12,6 +12,7 @@
 #=============================================================================#
 
 TOOLCHAIN = arm-none-eabi-
+CRTEMU =  crt_emu_lpc11_13_nxp
 
 CXX = $(TOOLCHAIN)g++
 CC = $(TOOLCHAIN)gcc
@@ -265,13 +266,13 @@ print_size :
 #-----------------------------------------------------------------------------#
 
 run : all 
-	/Applications/lpcxpresso_5.1.0_2048/lpcxpresso/bin/crt_emu_lpc11_13_nxp -2 -pLPC1114FN/102 -wire=winusb -flash-load-exec=$(ELF) -load-base=0x0000
+	$(CRTEMU) -2 -pLPC1114FN/102 -wire=winusb -flash-load-exec=$(ELF) -load-base=0x0000
 
 debug: $(ELF)
-	arm-none-eabi-gdb -x ../gdb_commands $(ELF)
+	arm-none-eabi-gdb -x gdb_commands $(ELF)
 
 debugtui: $(ELF)
-	arm-none-eabi-gdbtui -x ../gdb_commands $(ELF)
+	arm-none-eabi-gdbtui -x gdb_commands $(ELF)
 
 #-----------------------------------------------------------------------------#
 # create the desired output directory

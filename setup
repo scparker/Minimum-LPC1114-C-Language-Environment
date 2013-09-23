@@ -1,0 +1,11 @@
+#  Step 1:  Set path to GCC toolkit
+TOOLKIT=~stevenparker/toolchains/gcc-arm-none-eabi-4_7-2013q2/bin 
+
+#  Step 2:  Set path to Code Red Tools
+CRT=/Applications/lpcxpresso_5.1.0_2048/lpcxpresso/bin
+
+#  Add path to GCC
+PATH=$TOOLKIT:$CRT:$PATH
+
+#  Boot LPCLINK (Mac/Linux)
+dfu-util -d 0x471:0xdf55 -c 0 -t 2048 -R -D $CRT/LPCXpressoWIN.enc
